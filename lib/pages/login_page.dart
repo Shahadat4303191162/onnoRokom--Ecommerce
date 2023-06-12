@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:onno_rokom/auth/auth_service.dart';
+import 'package:onno_rokom/pages/launcher_page.dart';
 
 class LoginPage extends StatefulWidget {
   static const String routeName = '/login';
@@ -11,7 +14,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passController = TextEditingController();
-  final fromKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
   bool isObscureText = true;
   String errMsg = '';
   
@@ -27,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: Center(
         child: Form(
-          key: fromKey,
+          key: formKey,
           child: ListView(
             padding: const EdgeInsets.symmetric(vertical: 200,horizontal: 20),
             children: [
@@ -96,5 +99,25 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void authenticate() {}
+  void authenticate() async{
+    if(formKey.currentState!.validate()){
+      try{
+        final status = await AuthService.login(emailController.text,passController.text);
+        if(status){
+          if(!mounted) return;
+          Navigator.pushReplacementNamed(context, LauncherPage.routeName);
+        }else{
+          await AuthService.logout();
+          setState(() {
+            errMsg = 'This Email does not belong to an admin account';
+          });
+        }
+      }on FirebaseAuthException catch (e) {
+        setState(() {
+          errMsg = e.message!;/*1.1 email ba pass vul hole ei line e chole asbet*/
+        });
+
+      }
+    }
+  }
 }

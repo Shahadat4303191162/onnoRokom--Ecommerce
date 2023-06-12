@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:onno_rokom/pages/category_page.dart';
 import 'package:onno_rokom/pages/dashbord_page.dart';
@@ -9,9 +10,17 @@ import 'package:onno_rokom/pages/product_page.dart';
 import 'package:onno_rokom/pages/report_pages.dart';
 import 'package:onno_rokom/pages/settings_page.dart';
 import 'package:onno_rokom/pages/user_page.dart';
+import 'package:onno_rokom/providers/product_porvider.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context)=>ProductProvider()),
+    ],
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
