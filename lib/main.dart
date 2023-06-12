@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: LauncherPage.routeName,
       routes: {
-        DashboradPage.routeName: (_) => DashboradPage(),
+        DashboardPage.routeName: (_) => DashboardPage(),
         LauncherPage.routeName: (_) => LauncherPage(),
         LoginPage.routeName: (_) => LoginPage(),
         CategoryPage.routeName: (_) => CategoryPage(),

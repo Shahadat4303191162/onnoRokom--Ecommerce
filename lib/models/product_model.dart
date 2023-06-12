@@ -1,4 +1,3 @@
-
 const String productId = 'id';
 const String productName = 'name';
 const String productCategory = 'category';

@@ -11,14 +11,15 @@ import 'package:onno_rokom/providers/product_porvider.dart';
 import 'package:onno_rokom/widgets/dashboard_item_view.dart';
 import 'package:provider/provider.dart';
 
-class DashboradPage extends StatelessWidget {
+class DashboardPage extends StatelessWidget {
   static const String routeName = '/dashboard';
-  const DashboradPage({Key? key}) : super(key: key);
+  const DashboardPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     //
     Provider.of<ProductProvider>(context,listen: false).getAllCategories();
+    Provider.of<ProductProvider>(context,listen: false).getAllProducts();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dash board'),

@@ -18,7 +18,7 @@ class _LauncherPageState extends State<LauncherPage> {
       if(AuthService.user == null){
         Navigator.pushReplacementNamed(context, LoginPage.routeName);
       }else{
-        Navigator.pushReplacementNamed(context, DashboradPage.routeName);
+        Navigator.pushReplacementNamed(context, DashboardPage.routeName);
       }
     });
     // TODO: implement initState
