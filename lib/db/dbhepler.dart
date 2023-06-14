@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:onno_rokom/models/category_model.dart';
+import 'package:onno_rokom/models/order_constants_model.dart';
 
 import '../models/product_model.dart';
 import '../models/purchase_model.dart';
@@ -10,6 +11,8 @@ class DbHelper{
   static const String collectionCategory = 'categories';
   static const String collectionProduct = 'product';
   static const String collectionPurchase = 'purchases';
+  static const String collectionOrderSettings = 'settings';
+  static const String documentOrderConstant = 'orderConstant';
   static final FirebaseFirestore _db = FirebaseFirestore.instance;
 
 
@@ -25,10 +28,22 @@ class DbHelper{
     return doc.set(categoryModel.toMap());
   }
 
-  static Future<void> addNewPurchase(PurchaseModel purchaseModel){
+  static Future<void> addOrderConstants (OrderConstantsModel model){
+    return _db.collection(collectionOrderSettings)
+        .doc(documentOrderConstant).set(model.toMap());
+
+  }
+
+  static Future<void> addNewPurchase(PurchaseModel purchaseModel, CategoryModel catModel/* 1.2 Re-purchase product add for category*/){
+    final wb = _db.batch();//object
     final doc = _db.collection(collectionPurchase).doc();
+    final catDoc = _db.collection(collectionCategory).doc(catModel.id);
+    //dui tar i doc gula update kore nilam
     purchaseModel.id = doc.id;
-    return doc.set(purchaseModel.toMap());
+    wb.set(doc, purchaseModel.toMap());
+    wb.update(catDoc, {categoryProductCount : catModel.productCount});
+
+    return wb.commit();
   }
 
   static Future<void> addProduct(
@@ -61,6 +76,12 @@ class DbHelper{
 
   static Stream<DocumentSnapshot<Map<String,dynamic>>> getProductById(String id) =>
       _db.collection(collectionProduct).doc(id).snapshots();
+
+  static Stream<DocumentSnapshot<Map<String,dynamic>>> getOrderConstants() => /*2.1 orderSettings*/
+      _db.collection(collectionOrderSettings).doc(documentOrderConstant).snapshots();
+
+  static Future<DocumentSnapshot<Map<String,dynamic>>> getOrderConstants2() => /*2.1 orderSettings*/
+  _db.collection(collectionOrderSettings).doc(documentOrderConstant).get();
 
   static Future<void> updateProduct(String id, Map<String,dynamic>map) =>
        _db.collection(collectionProduct).doc(id).update(map);

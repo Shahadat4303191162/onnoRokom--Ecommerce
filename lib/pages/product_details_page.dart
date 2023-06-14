@@ -18,13 +18,12 @@ class ProductDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     dateChangeNotifier.value = DateTime.now();
     final pid = ModalRoute.of(context)!.settings.arguments as String;
+    final provider = Provider.of<ProductProvider>(context,listen: false);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Product Details'),
       ),
-      body: Consumer<ProductProvider>(
-        builder: (context, provider, child) =>
-            StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+      body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
           stream: provider.getProductById(pid),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
@@ -107,7 +106,6 @@ class ProductDetailsPage extends StatelessWidget {
             );
           },
         ),
-      ),
     );
   }
 
@@ -191,7 +189,7 @@ class ProductDetailsPage extends StatelessWidget {
                   quantity: num.parse(qController.text),
                   productId: productModel.id,
                 );
-                provider.addNewPurchase(purchase).then((value) {
+                provider.addNewPurchase(purchase,productModel.category!/* 1.1 Re-purchase product add for category*/).then((value) {
                   qController.clear();
                   priceController.clear();
                   Navigator.pop(context);

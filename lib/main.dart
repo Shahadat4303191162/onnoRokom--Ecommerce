@@ -10,6 +10,7 @@ import 'package:onno_rokom/pages/product_page.dart';
 import 'package:onno_rokom/pages/report_pages.dart';
 import 'package:onno_rokom/pages/settings_page.dart';
 import 'package:onno_rokom/pages/user_page.dart';
+import 'package:onno_rokom/providers/order_provider.dart';
 import 'package:onno_rokom/providers/product_porvider.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +20,7 @@ void main() async{
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context)=>ProductProvider()),
+      ChangeNotifierProvider(create: (context)=>OrderProvider()),
     ],
       child: const MyApp()));
 }
