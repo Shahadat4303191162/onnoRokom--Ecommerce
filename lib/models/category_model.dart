@@ -8,7 +8,11 @@ class CategoryModel {
   num productCount;
   bool available;
 
-  CategoryModel({this.id, this.name, this.productCount = 0, this.available = true});
+  CategoryModel({
+    this.id,
+    this.name,
+    this.productCount = 0,
+    this.available = true});
 
   Map<String,dynamic>toMap(){
     return<String,dynamic>{

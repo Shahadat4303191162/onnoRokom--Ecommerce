@@ -48,7 +48,7 @@ class _NewProductPageState extends State<NewProductPage> {
       appBar: AppBar(
         title: const Text('New Product'),
         actions: [
-          IconButton(onPressed: isUploading ? null : _saveContact, icon: Icon(Icons.save)),
+          IconButton(onPressed: isUploading ? null : _saveProduct, icon: Icon(Icons.save)),
         ],
       ),
       body: Form(
@@ -237,7 +237,7 @@ class _NewProductPageState extends State<NewProductPage> {
     );
   }
 
-  void _saveContact() async{
+  void _saveProduct() async{
     if(_imageUrl == null) {
       showMsg(context, 'Image required for product');
       return;
@@ -253,6 +253,7 @@ class _NewProductPageState extends State<NewProductPage> {
         category: _category,
         salesPrice: num.parse(salePriceController.text),
         imageUrl: _imageUrl,
+        stock: num.parse(quantityController.text),
       );
       final purchaseModel = PurchaseModel(
         dateModel: DateModel(

@@ -38,6 +38,7 @@ class ProductPage extends StatelessWidget {
                         backgroundImage: NetworkImage(product.imageUrl!),
                       ),
                       title: Text(product.name!),
+                      subtitle: Text('stock : ${product.stock!}'),
                       trailing: Text(
                         '$currencysymbol ${product.salesPrice}',
                         style: const TextStyle(color: Colors.green),

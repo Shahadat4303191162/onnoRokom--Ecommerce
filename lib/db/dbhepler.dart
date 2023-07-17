@@ -13,6 +13,13 @@ class DbHelper{
   static const String collectionPurchase = 'purchases';
   static const String collectionOrderSettings = 'settings';
   static const String documentOrderConstant = 'orderConstant';
+  static const String collectionRating = 'Rating';
+  static const String collectionComment = 'Comment';
+  static const String collectionUsers = 'Users';
+  static const String collectionCart = 'Cart';
+  static const String collectionOrder = 'Order';
+  static const String collectionOrderDetails = 'OrderDetails';
+  static const String collectionCities = 'Cities';
   static final FirebaseFirestore _db = FirebaseFirestore.instance;
 
 
