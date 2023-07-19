@@ -7,6 +7,7 @@ import 'package:onno_rokom/pages/product_page.dart';
 import 'package:onno_rokom/pages/report_pages.dart';
 import 'package:onno_rokom/pages/settings_page.dart';
 import 'package:onno_rokom/pages/user_page.dart';
+import 'package:onno_rokom/providers/order_provider.dart';
 import 'package:onno_rokom/providers/product_porvider.dart';
 import 'package:onno_rokom/widgets/dashboard_item_view.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,7 @@ class DashboardPage extends StatelessWidget {
     //
     Provider.of<ProductProvider>(context,listen: false).getAllCategories();
     Provider.of<ProductProvider>(context,listen: false).getAllProducts();
+    Provider.of<OrderProvider>(context,listen: false).getAllOrders();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dash board'),

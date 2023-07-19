@@ -41,7 +41,7 @@ class DbHelper{
 
   }
 
-  static Future<void> addNewPurchase(PurchaseModel purchaseModel, CategoryModel catModel/* 1.2 Re-purchase product add for category*/){
+  static Future<void> addNewPurchase(PurchaseModel purchaseModel, CategoryModel catModel, num newStock/* 1.2 Re-purchase product add for category*/){
     final wb = _db.batch();//object
     final doc = _db.collection(collectionPurchase).doc();
     final catDoc = _db.collection(collectionCategory).doc(catModel.id);
@@ -49,6 +49,8 @@ class DbHelper{
     purchaseModel.id = doc.id;
     wb.set(doc, purchaseModel.toMap());
     wb.update(catDoc, {categoryProductCount : catModel.productCount});
+    final proDoc = _db.collection(collectionProduct).doc(purchaseModel.productId);
+    wb.update(proDoc, {productStock : newStock});
 
     return wb.commit();
   }
@@ -75,6 +77,9 @@ class DbHelper{
 
   static Stream<QuerySnapshot<Map<String,dynamic>>> getAllProduct() =>
       _db.collection(collectionProduct).snapshots();
+
+  static Stream<QuerySnapshot<Map<String,dynamic>>> getAllOrders() =>
+      _db.collection(collectionOrder).snapshots();
 
   static Stream<QuerySnapshot<Map<String,dynamic>>> getAllPurchaseByProduct(String pid) =>
       _db.collection(collectionPurchase)

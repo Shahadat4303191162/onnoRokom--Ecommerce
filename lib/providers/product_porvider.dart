@@ -50,11 +50,12 @@ class ProductProvider extends ChangeNotifier{
     return DbHelper.addCategory(categoryModel);
   }
 
-  Future<void> addNewPurchase(PurchaseModel purchaseModel, String category/* 1.1 Re-purchase product add for category*/) {
+  Future<void> addNewPurchase(PurchaseModel purchaseModel, String category, num stock/* 1.1 Re-purchase product add for category*/) {
     //getCategoryByName metohod ta ke call korbo/* 1.1 Re-purchase product add for category*/
     final catModel = getCategoryByName(category);
     catModel.productCount += purchaseModel.quantity;//new quantity add
-    return DbHelper.addNewPurchase(purchaseModel,catModel);
+    final newStock= stock + purchaseModel.quantity;
+    return DbHelper.addNewPurchase(purchaseModel,catModel,newStock);
     //purcahse er sathe catModel ta o pass korbo cz category update korta category e id lakbe
   }
 

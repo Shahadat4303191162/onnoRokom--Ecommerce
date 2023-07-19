@@ -189,7 +189,7 @@ class ProductDetailsPage extends StatelessWidget {
                   quantity: num.parse(qController.text),
                   productId: productModel.id,
                 );
-                provider.addNewPurchase(purchase,productModel.category!/* 1.1 Re-purchase product add for category*/).then((value) {
+                provider.addNewPurchase(purchase,productModel.category!/* 1.1 Re-purchase product add for category*/,productModel.stock).then((value) {
                   qController.clear();
                   priceController.clear();
                   Navigator.pop(context);
