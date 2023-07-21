@@ -1,4 +1,5 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:onno_rokom/db/dbhepler.dart';
 import 'package:onno_rokom/models/order_constants_model.dart';
@@ -35,6 +36,10 @@ class OrderProvider extends ChangeNotifier{
           OrderModel.fromMap(snapshot.docs[index].data()));
       notifyListeners();
     });
+  }
+
+  Stream<QuerySnapshot<Map<String,dynamic>>> getAllOrdersByOrderId(String oid) {
+    return DbHelper.getAllOrdersByOrderId(oid);
   }
 
   List<OrderModel> getFilteredListBySingleDay(DateTime dt) {

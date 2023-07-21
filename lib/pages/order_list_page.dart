@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onno_rokom/pages/order_details_page.dart';
 import 'package:onno_rokom/providers/order_provider.dart';
 import 'package:onno_rokom/utils/constants.dart';
 import 'package:onno_rokom/utils/helper_function.dart';
@@ -22,6 +23,7 @@ class OrderListPage extends StatelessWidget {
           itemBuilder: (context, index) {
             final order = orderList[index];
             return ListTile(
+              onTap: () =>Navigator.pushNamed(context, OrderDetailsPage.routeName,arguments: order),
               title: Text(getFormattedDateTime(order.orderDate.timestamp.toDate(), 'dd/MM/yyyy hh:mm:ss a')),
               subtitle: Text(order.orderStatus),
               trailing: Text('$currencysymbol${order.grandTotal}'),

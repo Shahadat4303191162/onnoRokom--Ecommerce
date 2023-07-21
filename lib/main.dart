@@ -5,6 +5,7 @@ import 'package:onno_rokom/pages/dashbord_page.dart';
 import 'package:onno_rokom/pages/launcher_page.dart';
 import 'package:onno_rokom/pages/login_page.dart';
 import 'package:onno_rokom/pages/new_product_page.dart';
+import 'package:onno_rokom/pages/order_details_page.dart';
 import 'package:onno_rokom/pages/order_list_page.dart';
 import 'package:onno_rokom/pages/order_page.dart';
 import 'package:onno_rokom/pages/product_details_page.dart';
@@ -57,6 +58,7 @@ class MyApp extends StatelessWidget {
         User.routeName: (_) => User(),
         OrderPage.routeName: (_) => OrderPage(),
         OrderListPage.routeName: (_) => OrderListPage(),
+        OrderDetailsPage.routeName: (_) => OrderDetailsPage(),
 
       },
     );

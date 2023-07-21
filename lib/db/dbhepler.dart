@@ -81,6 +81,9 @@ class DbHelper{
   static Stream<QuerySnapshot<Map<String,dynamic>>> getAllOrders() =>
       _db.collection(collectionOrder).snapshots();
 
+  static Stream<QuerySnapshot<Map<String,dynamic>>> getAllOrdersByOrderId(String oid) =>
+      _db.collection(collectionOrder).doc(oid).collection(collectionOrderDetails).snapshots();
+
   static Stream<QuerySnapshot<Map<String,dynamic>>> getAllPurchaseByProduct(String pid) =>
       _db.collection(collectionPurchase)
           .where(purchaseProductId, isEqualTo: pid)
