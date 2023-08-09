@@ -9,6 +9,7 @@ class DashboardItem{
     required this.icon,
     required this.title});
 
+  //koyek ta constant niye rakhlam
   static const String product = 'Product';
   static const String category = 'Category';
   static const String order = 'Order';

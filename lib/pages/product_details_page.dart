@@ -16,6 +16,7 @@ class ProductDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final namEditingController = TextEditingController();
     dateChangeNotifier.value = DateTime.now();
     final pid = ModalRoute.of(context)!.settings.arguments as String;
     final provider = Provider.of<ProductProvider>(context,listen: false);
@@ -70,7 +71,36 @@ class ProductDetailsPage extends StatelessWidget {
                     ),
                     trailing: IconButton(
                       icon: const Icon(Icons.edit),
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context){
+                              return AlertDialog(
+                                title: const Text('Edit Sales Price'),
+                                content: TextField(
+                                  keyboardType: TextInputType.number,
+                                  controller: namEditingController,
+                                  decoration: InputDecoration(
+                                    hintText: '$currencysymbol ${product.salesPrice}',
+                                  ),
+                                ),
+                                actions: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text('Cancel'),),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      provider.updateProduct(pid, productSalesPrice, num.parse(namEditingController.text));
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text('Save'),
+                                  )
+                                ],
+                              );
+                            });
+                      },
                     ),
                   ),
                   ListTile(

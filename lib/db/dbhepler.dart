@@ -41,7 +41,9 @@ class DbHelper{
 
   }
 
-  static Future<void> addNewPurchase(PurchaseModel purchaseModel, CategoryModel catModel, num newStock/* 1.2 Re-purchase product add for category*/){
+  static Future<void> addNewPurchase(
+      PurchaseModel purchaseModel,
+      CategoryModel catModel, num newStock/* 1.2 Re-purchase product add for category*/){
     final wb = _db.batch();//object
     final doc = _db.collection(collectionPurchase).doc();
     final catDoc = _db.collection(collectionCategory).doc(catModel.id);

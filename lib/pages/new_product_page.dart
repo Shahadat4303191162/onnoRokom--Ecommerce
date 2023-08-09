@@ -299,14 +299,14 @@ class _NewProductPageState extends State<NewProductPage> {
   }
 
   void _getImage() async{
-    final selecteImage = await ImagePicker().pickImage(source: _imageSource,imageQuality: 75);
-    if (selecteImage != null) {
+    final selectedImage = await ImagePicker().pickImage(source: _imageSource,imageQuality: 75);
+    if (selectedImage != null) {
       setState(() {
         isUploading = true;
       });
       try {
         final url =
-            await context.read<ProductProvider>().updateImage(selecteImage);
+            await context.read<ProductProvider>().updateImage(selectedImage);
         setState(() {
           _imageUrl = url;
           isUploading = false;
