@@ -40,9 +40,10 @@ dependencies:
   cloud_firestore:
   firebase_storage:
   provider:
+  http:
   intl:
   image_picker:
-  flutter_easyloading: ^3.0.5
+  flutter_easyloading:
 
 dev_dependencies:
   flutter_test:

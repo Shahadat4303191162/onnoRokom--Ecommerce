@@ -20,6 +20,7 @@ class DbHelper{
   static const String collectionOrder = 'Order';
   static const String collectionOrderDetails = 'OrderDetails';
   static const String collectionCities = 'Cities';
+  static const String collectionNotification = 'Notification';
   static final FirebaseFirestore _db = FirebaseFirestore.instance;
 
 
@@ -99,6 +100,9 @@ class DbHelper{
 
   static Future<DocumentSnapshot<Map<String,dynamic>>> getOrderConstants2() => /*2.1 orderSettings*/
   _db.collection(collectionOrderSettings).doc(documentOrderConstant).get();
+
+  static Stream<QuerySnapshot<Map<String,dynamic>>> getAllNotification()=>
+    _db.collection(collectionNotification).snapshots();
 
   static Future<void> updateProduct(String id, Map<String,dynamic>map) =>
        _db.collection(collectionProduct).doc(id).update(map);

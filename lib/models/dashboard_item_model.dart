@@ -16,6 +16,7 @@ class DashboardItem{
   static const String user = 'Users';
   static const String setting = 'Setting';
   static const String report = 'Report';
+  static const String notification = 'Notification';
 
 }
 
@@ -26,4 +27,5 @@ final List<DashboardItem> dashboardItem = [
   DashboardItem(icon: Icons.person, title: DashboardItem.user),
   DashboardItem(icon: Icons.settings, title: DashboardItem.setting),
   DashboardItem(icon: Icons.area_chart, title: DashboardItem.report),
+  DashboardItem(icon: Icons.notifications, title: DashboardItem.notification)
 ];

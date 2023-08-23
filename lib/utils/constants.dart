@@ -16,3 +16,9 @@ abstract class OrderStatus{
 enum OrderFilter{
   TODAY,YESTERDAY,SEVER_DAYS, THIS_MONTH,ALL_TIME;
 }
+
+abstract class NotificationType {
+  static const String comment = 'New Comment';
+  static const String order = 'New Order';
+  static const String user = 'New User';
+}
